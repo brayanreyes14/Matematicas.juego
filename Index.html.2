@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego de Matemáticas - 2º Preparatoria</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      text-align: center;
+      padding: 50px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      max-width: 500px;
+      margin: auto;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 60%;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Juego de Matemáticas - Nivel Prepa</h2>
+    <p id="pregunta"></p>
+    <input type="text" id="respuesta" placeholder="Escribe tu respuesta">
+    <br>
+    <button onclick="verificar()">Verificar</button>
+    <p id="resultado"></p>
+  </div>
+
+  <script>
+    const preguntas = [
+      { pregunta: "¿Cuánto es (5² + 3) × 2?", respuesta: 58 },
+      { pregunta: "¿Cuál es la derivada de x²?", respuesta: "2x" },
+      { pregunta: "Resuelve: (10 × 2) - (4 + 6)", respuesta: 10 },
+      { pregunta: "¿Cuánto es el MCD de 36 y 60?", respuesta: 12 },
+      { pregunta: "¿Cuánto es (3 + 4)²?", respuesta: 49 }
+    ];
+
+    let actual = 0;
+
+    function mostrarPregunta() {
+      document.getElementById("pregunta").innerText = preguntas[actual].pregunta;
+      document.getElementById("respuesta").value = "";
+      document.getElementById("resultado").innerText = "";
+    }
+
+    function verificar() {
+      const r = document.getElementById("respuesta").value.trim();
+      const correcta = preguntas[actual].respuesta;
+      const resultado = document.getElementById("resultado");
+
+      if (r.toLowerCase() === String(correcta).toLowerCase()) {
+        resultado.innerText = "¡Correcto!";
+        actual++;
+        if (actual < preguntas.length) {
+          setTimeout(mostrarPregunta, 1500);
+        } else {
+          resultado.innerText = "¡Felicidades! Terminaste el juego.";
+        }
+      } else {
+        resultado.innerText = "Incorrecto. Intenta otra vez.";
+      }
+    }
+
+    // Mostrar la primera pregunta al cargar
+    mostrarPregunta();
+  </script>
+</body>
+</html>
